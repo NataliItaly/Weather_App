@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- <script
+      src="https://kit.fontawesome.com/2098af3067.js"
+      crossorigin="anonymous"
+    ></script> -->
+
+    <title>Weather App</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <form action="" class="form" id="city-form">
+          <p class="form__inputs">
+            <input
+              type="text"
+              placeholder="Enter your city name"
+              id="city-input"
+              class="form__input"
+            />
+            <input
+              type="text"
+              placeholder="Enter your zip code"
+              id="zip"
+              class="form__input"
+            />
+            <input
+              type="submit"
+              value="Search"
+              id="generate"
+              class="form__btn"
+            />
+            <button id="current-geolocation" class="form__btn btn-info">
+              Search Geolocation
+            </button>
+          </p>
+          <p>
+            <textarea
+              name=""
+              id="feelings"
+              cols="30"
+              rows="1"
+              class="form__textarea"
+            >
+How do you feel today?
+            </textarea>
+          </p>
+        </form>
+      </header>
+      <main class="main">
+        <section class="section section_weather">
+          <h1 class="weather__city" id="city-name"></h1>
+          <div class="weather__entry" id="entryHolder">
+            <div class="weather__data" id="date">
+              <div class="weather__calendar" id="week-day"></div>
+              <div class="weather__calendar" id="current-date"></div>
+              <div class="weather__calendar" id="time"></div>
+            </div>
+            <div class="weather__data" id="temp">
+              <i class="fa-solid fa-temperature-low"></i>
+              <p>
+                <span class="weather__temp" id="current-temp"></span>
+                <span class="weather__units weather__units_active" id="celcius"
+                  >°C</span
+                >
+                <span class="weather__divider">/</span>
+                <span class="weather__units" id="farenheit">°F</span>
+              </p>
+              <p>feels like <span class="weather__feel-temp"></span>°C</p>
+              <div class="weather__image"></div>
+            </div>
+            <div class="weather__data" id="content">
+              <ul class="weather__list description">
+                <li class="description__item">
+                  <span
+                    class="description__data"
+                    id="current-weather-description"
+                  ></span>
+                </li>
+                <li class="description__item">
+                  wind speed
+                  <span class="description__data" id="current-wind"></span>
+                </li>
+                <li class="description__item">
+                  humidity
+                  <span class="description__data" id="current-humidity"></span>
+                </li>
+                <li class="description__item">
+                  sunrise
+                  <span class="description__data" id="current-sunrise"></span>
+                </li>
+                <li class="description__item">
+                  sunset
+                  <span class="description__data" id="current-sunset"></span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section section_forecast">
+          <div class="forecast__data"></div>
+        </section>
+      </main>
+      <footer class="footer">
+        <p>
+          This App is created by
+          <a
+            href="https://nataliitaly.github.io/rsschool-cv/"
+            class="footer__link"
+            target="_blank"
+            >Krylova Nataliya</a
+          >
+          for
+          <a
+            href="https://emc.udacity.com/c/scholarshipsbertelsmann/catalog/MTO6AM7H/i/nd/nd0011-connect-bmann"
+            class="footer__link"
+            target="_blank"
+            >Udacity Front End Nanodegree Program</a
+          >
+        </p>
+      </footer>
+    </div>
+    <script src="js/app.js"></script>
+  </body>
+</html>

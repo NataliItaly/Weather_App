@@ -1,0 +1,171 @@
+* {
+  padding: 0;
+  margin: 0;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  transition: 0.4s all;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  color: #4e4c4c;
+  background-image: url("images/sky.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.container {
+  padding-top: 30px;
+  background-color: rgba(211, 211, 227, 0.678);
+  text-align: center;
+  padding: 30px;
+}
+
+.main-row {
+  padding: 0 20px;
+}
+
+h1 {
+  font-size: 32px;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.form__inputs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.form__input {
+  display: inline-block;
+  width: 250px;
+  border-radius: 5px;
+  border: none;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  outline: gray;
+}
+
+.form__btn {
+  display: inline-block;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  transition: 0.4s;
+}
+
+.form__textarea {
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-family: "Poppins", sans-serif;
+  color: #4e4c4c;
+  font-size: 16px;
+}
+
+.form__input::placeholder {
+  font-size: 16px;
+}
+
+.section {
+  text-align: center;
+  padding: 20px;
+}
+
+.weather__entry {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.weather__data {
+  width: 200px;
+}
+
+.weather__calendar {
+  font-size: 20px;
+}
+
+.weather__temp {
+  font-size: 30px;
+  color: #eb5959;
+}
+
+.feel-temperature {
+  font-size: 20px;
+}
+
+.weather__units {
+  cursor: pointer;
+  color: #4e4c4c;
+}
+
+.weather__units:hover {
+  transform: scale(1.5);
+}
+
+.weather__units_active {
+  color: #212529;
+}
+
+.weather__divider {
+  font-size: 21px;
+}
+
+.weather__list {
+  margin: 0 auto;
+  text-align: right;
+}
+
+.weather__image {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.weather-image {
+  width: 150px;
+}
+
+.description__item {
+  margin-bottom: 10px;
+  color: #585555;
+}
+
+.description__data {
+  color: black;
+}
+
+.forecast__data {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.forecast__temp_min {
+  opacity: 0.8;
+}
+
+.footer {
+  padding-top: 20px;
+  font-size: 16px;
+  font-style: italic;
+}
+
+.footer__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer__link:hover {
+  color: gray;
+}
