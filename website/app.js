@@ -1,9 +1,11 @@
 const city = document.getElementById("city-name");
 const cityInput = document.getElementById("city-input");
+const zipInput = document.getElementById("zip-input");
 const dateBlock = document.getElementById("current-date");
 const timeBlock = document.getElementById("time");
 const weekDayBlock = document.getElementById("week-day");
 const cityForm = document.querySelector("#city-form");
+const zipForm = document.querySelector("#zip-form");
 const celcius = document.getElementById("celcius");
 const farenheit = document.getElementById("farenheit");
 const currentTemperature = document.getElementById("current-temp");
@@ -29,7 +31,21 @@ if (isCelcius === true) {
 
 cityForm.addEventListener("submit", function (event) {
   event.preventDefault();
-  city.innerHTML = cityInput.value;
+  let cityName = cityInput.value;
+  setCity(cityName);
+  zipInput.value = "";
+  forecastData.innerHTML = "";
+  isCelcius = true;
+  celcius.classList.add("weather__units_active");
+  farenheit.classList.remove("weather__units_active");
+});
+
+zipForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  let cityZip = zipInput.value;
+  setZipCode(cityZip);
+  cityInput.value = "";
+  forecastData.innerHTML = "";
   isCelcius = true;
   celcius.classList.add("weather__units_active");
   farenheit.classList.remove("weather__units_active");
@@ -47,8 +63,6 @@ let apiKey = "5c08670149a0b1a4dc7a372a3d5e5333";
 let units = "metric";
 
 function setCity(cityName) {
-  /* let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=${units}`;
-  axios.get(url).then(showWeather); */
   fetch(`${url}weather?q=${cityName}&appid=${apiKey}&units=${units}`)
     .then((weather) => {
       return weather.json();
@@ -56,16 +70,15 @@ function setCity(cityName) {
     .then(showWeather);
 }
 
-setCity("Kyiv");
-
-function submitSearch(event) {
-  event.preventDefault();
-  let cityName = cityInput.value;
-  setCity(cityName);
-  forecastData.innerHTML = "";
+function setZipCode(zipCode) {
+  fetch(`${url}weather?zip=${zipCode},da&appid=${apiKey}&units=${units}`)
+    .then((weather) => {
+      return weather.json();
+    })
+    .then(showWeather);
 }
 
-cityForm.addEventListener("submit", submitSearch);
+setCity("Kyiv");
 
 function showWeather(data) {
   console.log(data);
@@ -78,6 +91,7 @@ function showWeather(data) {
   let sunset = data.sys.sunset;
   let currentImage = document.querySelector(".weather__image");
   city.innerHTML = data.name;
+  city.style.fontSize = "";
   currentTemperature.textContent = temperature;
   currentWeatherDescription.textContent = weatherDesc;
   currentFeelTemperature.textContent = feelTemperature;
@@ -96,10 +110,8 @@ function setPosition(position) {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
 
-  /* let url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
-  axios.get(url).then(showWeather); */
   fetch(
-    `${url}weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
+    `${url}weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`
   )
     .then((weather) => {
       return weather.json();
@@ -113,22 +125,21 @@ function getCurrentLocation() {
   farenheit.classList.remove("weather__units_active");
   forecastData.innerHTML = "";
   cityInput.value = "";
+  city.textContent = "Searching for your location...";
+  city.style.fontSize = "14px";
   navigator.geolocation.getCurrentPosition(setPosition);
 }
 
 currentGeolocation.addEventListener("click", function (event) {
   event.preventDefault();
-  cityInput.value = "Searching for your location...";
   getCurrentLocation();
 });
 
 /*----------------------display 6 days forecast---------------------- */
 
 function getForecast(coordinates) {
-  /* const apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayForecast); */
   fetch(
-    `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`
+    `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${units}`
   )
     .then((weather) => {
       return weather.json();
@@ -204,7 +215,6 @@ function displayForecast(data) {
       currentFeelTemperature.innerHTML = countFarenheit(currentFeelTemp);
 
       let tempMin = document.querySelectorAll(".forecast__temp_min");
-      console.log(tempMin);
       tempMin.forEach((item) => {
         let minTemp = parseInt(item.innerHTML);
         item.innerHTML = countFarenheit(minTemp) + "°";

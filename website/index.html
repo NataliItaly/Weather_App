@@ -23,7 +23,7 @@
   <body>
     <div class="container">
       <header class="header">
-        <form action="" class="form" id="city-form">
+        <form action="@" class="form" id="city-form">
           <p class="form__inputs">
             <input
               type="text"
@@ -32,21 +32,29 @@
               class="form__input"
             />
             <input
-              type="text"
-              placeholder="Enter your zip code"
-              id="zip"
-              class="form__input"
-            />
-            <input
               type="submit"
-              value="Search"
-              id="generate"
+              value="Search By City Name"
+              id="generate-city"
               class="form__btn"
             />
-            <button id="current-geolocation" class="form__btn btn-info">
-              Search Geolocation
-            </button>
           </p>
+        </form>
+        <form action="@" class="form" id="zip-form">
+          <input
+            type="text"
+            placeholder="Enter your zip code"
+            id="zip-input"
+            class="form__input"
+          />
+          <input
+            type="submit"
+            value="Search By Zip Code"
+            id="generate-zip"
+            class="form__btn"
+          />
+          <button id="current-geolocation" class="form__btn btn-info">
+            Search Geolocation
+          </button>
           <p>
             <textarea
               name=""
@@ -55,7 +63,7 @@
               rows="1"
               class="form__textarea"
             >
-How do you feel today?
+              How do you feel today?
             </textarea>
           </p>
         </form>
