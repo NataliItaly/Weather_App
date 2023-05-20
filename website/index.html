@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Search the weather by city name, zip code or yur geolocation"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -12,7 +16,7 @@
     />
     <link rel="stylesheet" href="style.css" />
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <!-- <script
       src="https://kit.fontawesome.com/2098af3067.js"
       crossorigin="anonymous"
@@ -21,6 +25,7 @@
     <title>Weather App</title>
   </head>
   <body>
+    <div class="container_video"></div>
     <div class="container">
       <header class="header">
         <form action="@" class="form" id="city-form">
@@ -59,12 +64,11 @@
             <textarea
               name=""
               id="feelings"
-              cols="30"
+              cols="40"
               rows="1"
               class="form__textarea"
-            >
-              How do you feel today?
-            </textarea>
+              placeholder="How do you feel today?"
+            ></textarea>
           </p>
         </form>
       </header>

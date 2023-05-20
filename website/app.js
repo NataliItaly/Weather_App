@@ -1,3 +1,4 @@
+const BODY = document.body;
 const city = document.getElementById("city-name");
 const cityInput = document.getElementById("city-input");
 const zipInput = document.getElementById("zip-input");
@@ -14,6 +15,17 @@ const currentWeatherDescription = document.getElementById(
   "current-weather-description"
 );
 const forecastData = document.querySelector(".forecast__data");
+const videoContainer = document.querySelector(".container_video");
+const weatherConditionsArr = [
+  "clear",
+  "clouds",
+  "mist",
+  "rain",
+  "thunderstorm",
+  "snow",
+];
+let hours = "";
+let month = "";
 
 /*------------------celcius-farenheit--------------- */
 
@@ -71,7 +83,7 @@ function setCity(cityName) {
 }
 
 function setZipCode(zipCode) {
-  fetch(`${url}weather?zip=${zipCode},da&appid=${apiKey}&units=${units}`)
+  fetch(`${url}weather?zip=${zipCode}&appid=${apiKey}&units=${units}`)
     .then((weather) => {
       return weather.json();
     })
@@ -82,26 +94,35 @@ setCity("Kyiv");
 
 function showWeather(data) {
   console.log(data);
-  let temperature = Math.round(data.main.temp);
-  let weatherDesc = data.weather[0].description;
-  let feelTemperature = Math.round(data.main.feels_like);
-  let humidity = data.main.humidity;
-  let wind = data.wind.speed;
-  let sunrise = data.sys.sunrise;
-  let sunset = data.sys.sunset;
-  let currentImage = document.querySelector(".weather__image");
-  city.innerHTML = data.name;
-  city.style.fontSize = "";
-  currentTemperature.textContent = temperature;
-  currentWeatherDescription.textContent = weatherDesc;
-  currentFeelTemperature.textContent = feelTemperature;
-  currentHumidity.textContent = humidity + " %";
-  currentWind.textContent = wind + " m/s";
-  currentSunrise.textContent = formatTime(sunrise);
-  currentSunset.textContent = formatTime(sunset);
-  currentImage.innerHTML = `<img src="http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="${data.weather[0].description}">`;
-  cityInput.value = "";
-  getForecast(data.coord);
+  if (data.message === "city not found") {
+    city.classList.add("weather__city_error");
+    city.textContent = "Please enter correct location";
+    cityInput.value = "";
+    zipInput.value = "";
+  } else {
+    city.classList.remove("weather__city_error");
+    let temperature = Math.round(data.main.temp);
+    let weatherDescription = data.weather[0].description;
+    let feelTemperature = Math.round(data.main.feels_like);
+    let humidity = data.main.humidity;
+    let wind = data.wind.speed;
+    let sunrise = data.sys.sunrise;
+    let sunset = data.sys.sunset;
+    let currentImage = document.querySelector(".weather__image");
+    city.innerHTML = data.name;
+    city.style.fontSize = "";
+    currentTemperature.textContent = temperature;
+    currentWeatherDescription.textContent = weatherDescription;
+    currentFeelTemperature.textContent = feelTemperature;
+    currentHumidity.textContent = humidity + " %";
+    currentWind.textContent = wind + " m/s";
+    currentSunrise.textContent = formatTime(sunrise);
+    currentSunset.textContent = formatTime(sunset);
+    currentImage.innerHTML = `<img src="http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="${data.weather[0].description}">`;
+    cityInput.value = "";
+    getForecast(data.coord);
+    setBackground(weatherDescription);
+  }
 }
 
 /*--------------------- set user's geolocation---------------------*/
@@ -264,13 +285,13 @@ const months = [
 function showTime() {
   let now = new Date();
   let day = now.getDate();
-  let month = now.getMonth();
+  month = now.getMonth();
   let year = now.getFullYear();
-  let hours = setZero(now.getHours());
-  let minutes = setZero(now.getMinutes());
+  hours = now.getHours();
+  let minutes = now.getMinutes();
   let dateString = `${months[month]} ${day}, ${year}`;
   dateBlock.innerHTML = dateString;
-  let timeString = `${hours}:${minutes}`;
+  let timeString = `${setZero(hours)}:${setZero(minutes)}`;
   timeBlock.innerHTML = timeString;
   let weekDay = now.getDay();
   weekDayBlock.innerHTML = `${weekDays[weekDay]}`;
@@ -294,4 +315,22 @@ function formatDay(timeSpamp) {
   let date = new Date(timeSpamp * 1000);
   let day = date.getDay();
   return weekDays[day];
+}
+
+/*-------------------------- Set video background ------------------------ */
+
+function setBackground(description) {
+  let dayPart = (hours >= 0 || hours <= 5) && hours >= 20 ? "day" : "night";
+  let keyDescription = "";
+  console.log(dayPart);
+  weatherConditionsArr.forEach((condition) => {
+    if (description.includes(condition)) {
+      keyDescription = condition;
+      console.log(keyDescription);
+    }
+  });
+
+  videoContainer.innerHTML = `<video autoplay muted loop id="myVideo">
+        <source src="video/${dayPart}/${keyDescription}.mp4" type="video/mp4">
+      </video>`;
 }

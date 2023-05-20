@@ -27,11 +27,21 @@ ul {
   padding: 30px;
 }
 
+.container_video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
 .main-row {
   padding: 0 20px;
 }
 
 h1 {
+  height: 48px;
   font-size: 32px;
   text-transform: capitalize;
   text-align: center;
@@ -67,13 +77,14 @@ h1 {
 
 .form__textarea {
   border-radius: 10px;
-  padding: 10px 20px;
+  padding: 10px;
   font-family: "Poppins", sans-serif;
   color: #4e4c4c;
   font-size: 16px;
 }
 
-.form__input::placeholder {
+.form__input::placeholder,
+.form__textarea::placeholder {
   font-size: 16px;
   color: #ada5a5;
 }
@@ -81,6 +92,11 @@ h1 {
 .section {
   text-align: center;
   padding: 20px;
+}
+
+.weather__city_error {
+  color: #af1b1b;
+  font-size: 18px;
 }
 
 .weather__entry {
