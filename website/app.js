@@ -26,8 +26,82 @@ const weatherConditionsArr = [
 ];
 let hours = "";
 let month = "";
+const languages = {
+  af: "Afrikaans",
+  al: "Albanian",
+  ar: "Arabic",
+  az: "Azerbaijani",
+  bg: "Bulgarian",
+  ca: "Catalan",
+  cz: "Czech",
+  da: "Danish",
+  de: "German",
+  el: "Greek",
+  en: "English",
+  eu: "Basque",
+  fa: "Persian (Farsi)",
+  fi: "Finnish",
+  fr: "French",
+  gl: "Galician",
+  he: "Hebrew",
+  hi: "Hindi",
+  hr: "Croatian",
+  hu: "Hungarian",
+  id: "Indonesian",
+  it: "Italian",
+  ja: "Japanese",
+  kr: "Korean",
+  la: "Latvian",
+  lt: "Lithuanian",
+  mk: "Macedonian",
+  no: "Norwegian",
+  nl: "Dutch",
+  pl: "Polish",
+  pt: "Portuguese",
+  pt_br: "Português Brasil",
+  ro: "Romanian",
+  ru: "Russian",
+  sv: "Swedish",
+  sk: "Slovak",
+  sl: "Slovenian",
+  es: "Spanish",
+  sr: "Serbian",
+  th: "Thai",
+  tr: "Turkish",
+  ua: "Ukrainian",
+  vi: "Vietnamese",
+  zh_cn: "Chinese Simplified",
+  zh_tw: "Chinese Traditional",
+  zu: "Zulu",
+};
 
-/*------------------celcius-farenheit--------------- */
+/*------------------ Fill select language options ------------------ */
+const langSelect = document.getElementById("lang-select");
+for (let language in languages) {
+  const option = document.createElement("option");
+  option.classList.add("form__option_language");
+  option.textContent = languages[language];
+  option.value = language;
+  option.setAttribute("data-language", language);
+  langSelect.append(option);
+}
+
+/*------------------- Event on language change--------------- */
+
+let lang = langSelect.value;
+console.log(langSelect.value);
+
+function getLanguage(elem) {
+  return elem.value;
+}
+
+langSelect.addEventListener("change", function () {
+  lang = langSelect.value;
+  //getLanguage(this);
+  console.log(lang);
+});
+
+/*-------------------- Celcius-Farenheit -------------------- */
 
 let isCelcius = true;
 
@@ -75,7 +149,9 @@ let apiKey = "5c08670149a0b1a4dc7a372a3d5e5333";
 let units = "metric";
 
 function setCity(cityName) {
-  fetch(`${url}weather?q=${cityName}&appid=${apiKey}&units=${units}`)
+  fetch(
+    `${url}weather?q=${cityName}&appid=${apiKey}&units=${units}&lang=${lang}`
+  )
     .then((weather) => {
       return weather.json();
     })
@@ -174,16 +250,18 @@ function displayForecast(data) {
   forecastArr.forEach((day, index) => {
     if (index > 0 && index < 7) {
       let dayForecast = document.createElement("div");
-      dayForecast.classList.add("forecast__day");
+      dayForecast.classList.add("forecast__day", "block");
       let minTempreture = Math.round(day.temp.min);
       let maxTempreture = Math.round(day.temp.max);
 
-      dayForecast.innerHTML = `<div class="week-day-min">${formatDay(
+      dayForecast.innerHTML = `<div class="forecast__title">${formatDay(
         day.dt
       )}</div>
             <div class="forecast__icon"><img src="http://openweathermap.org/img/wn/${
               day.weather[0].icon
-            }@2x.png" alt="${day.weather[0].description}"></div>
+            }@2x.png" alt="${
+        day.weather[0].description
+      }" class="forecast__img"></div>
             <div class="forecast__temp">
               <span class="forecast__temp_min">${minTempreture}°</span>
               <span class="forecast__temp_max">${maxTempreture}°</span>
@@ -320,7 +398,8 @@ function formatDay(timeSpamp) {
 /*-------------------------- Set video background ------------------------ */
 
 function setBackground(description) {
-  let dayPart = (hours >= 0 || hours <= 5) && hours >= 20 ? "day" : "night";
+  let dayPart = (hours >= 0 && hours <= 5) || hours >= 20 ? "night" : "day";
+  console.log(hours >= 0);
   let keyDescription = "";
   console.log(dayPart);
   weatherConditionsArr.forEach((condition) => {

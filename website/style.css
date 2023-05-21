@@ -9,8 +9,8 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  font-size: 18px;
-  color: #4e4c4c;
+  font-size: 16px;
+  color: #323030;
   background-image: url("images/sky.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -22,7 +22,6 @@ ul {
 
 .container {
   padding-top: 30px;
-  background-color: rgba(211, 211, 227, 0.678);
   text-align: center;
   padding: 30px;
 }
@@ -36,15 +35,20 @@ ul {
   z-index: -1;
 }
 
-.main-row {
-  padding: 0 20px;
+.block {
+  width: fit-content;
+  border-radius: 5px;
+  background-color: rgba(211, 211, 227, 0.678);
 }
 
 h1 {
   height: 48px;
+  padding: 0 20px;
+  margin: 0 auto 10px;
   font-size: 32px;
   text-transform: capitalize;
   text-align: center;
+  transition: 0.4s;
 }
 
 .form__inputs {
@@ -57,7 +61,6 @@ h1 {
 .form__input {
   display: inline-block;
   max-width: 150px;
-  border-radius: 5px;
   border: none;
   padding: 10px 20px;
   margin-bottom: 20px;
@@ -66,27 +69,33 @@ h1 {
 
 .form__btn {
   display: inline-block;
-  border-radius: 5px;
   padding: 10px 20px;
   margin-bottom: 20px;
-  font-size: 16px;
+  font-size: 14px;
+  color: inherit;
   cursor: pointer;
   border: none;
   transition: 0.4s;
 }
 
 .form__textarea {
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 10px;
   font-family: "Poppins", sans-serif;
-  color: #4e4c4c;
+  color: inherit;
   font-size: 16px;
 }
 
 .form__input::placeholder,
 .form__textarea::placeholder {
-  font-size: 16px;
-  color: #ada5a5;
+  font-size: 14px;
+  color: #656060;
+}
+
+.form__select_language {
+  height: 38px;
+  padding-left: 10px;
+  font-size: 14px;
 }
 
 .section {
@@ -95,8 +104,10 @@ h1 {
 }
 
 .weather__city_error {
-  color: #af1b1b;
+  color: #db5304;
   font-size: 18px;
+  font-weight: 400;
+  line-height: 46px;
 }
 
 .weather__entry {
@@ -113,18 +124,24 @@ h1 {
   font-size: 20px;
 }
 
-.weather__temp {
-  font-size: 30px;
-  color: #eb5959;
+.weather__calendar:first-child {
+  padding-top: 10px;
+  color: #db5304;
 }
 
-.feel-temperature {
-  font-size: 20px;
+.weather__temp {
+  font-size: 30px;
+  color: #db5304;
+}
+
+.weather__feel-temp {
+  font-size: 18px;
 }
 
 .weather__units {
+  font-size: 18px;
   cursor: pointer;
-  color: #4e4c4c;
+  color: #323030;
 }
 
 .weather__units:hover {
@@ -132,16 +149,15 @@ h1 {
 }
 
 .weather__units_active {
-  color: #212529;
+  color: #db5304;
 }
 
 .weather__divider {
-  font-size: 21px;
+  font-size: 18px;
 }
 
 .weather__list {
-  margin: 0 auto;
-  text-align: right;
+  margin: 10px auto 0;
 }
 
 .weather__image {
@@ -154,12 +170,29 @@ h1 {
 }
 
 .description__item {
-  margin-bottom: 10px;
-  color: #585555;
+  margin-bottom: 5px;
+}
+
+.description__item:last-child {
+  margin-bottom: 0;
 }
 
 .description__data {
   color: black;
+}
+
+.description__title {
+  color: #db5304;
+}
+
+.forecast__day {
+  width: 100px;
+  padding-top: 5px;
+  font-size: 15px;
+}
+
+.forecast__title {
+  margin-bottom: -10px;
 }
 
 .forecast__data {
@@ -168,21 +201,36 @@ h1 {
   gap: 20px;
 }
 
+.forecast__img {
+  width: 80px;
+  height: 80px;
+}
+
+.forecast__temp {
+  margin-top: -10px;
+}
+
 .forecast__temp_min {
   opacity: 0.8;
 }
 
 .footer {
   padding-top: 20px;
-  font-size: 16px;
+  font-size: 14px;
   font-style: italic;
+}
+
+.footer__links {
+  padding: 0 20px;
+  margin: 0 auto;
 }
 
 .footer__link {
   color: inherit;
   text-decoration: none;
+  transition: 0.3s;
 }
 
 .footer__link:hover {
-  color: gray;
+  color: #db5304;
 }

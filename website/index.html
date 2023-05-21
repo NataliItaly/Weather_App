@@ -34,14 +34,23 @@
               type="text"
               placeholder="Enter your city name"
               id="city-input"
-              class="form__input"
+              class="form__input block"
             />
             <input
               type="submit"
               value="Search By City Name"
               id="generate-city"
-              class="form__btn"
+              class="form__btn block"
             />
+            <select
+              name="lang-select"
+              id="lang-select"
+              class="form__select_language block"
+            >
+              <option value="@" class="form__option_language">
+                Choose Language
+              </option>
+            </select>
           </p>
         </form>
         <form action="@" class="form" id="zip-form">
@@ -49,15 +58,15 @@
             type="text"
             placeholder="Enter your zip code"
             id="zip-input"
-            class="form__input"
+            class="form__input block"
           />
           <input
             type="submit"
             value="Search By Zip Code"
             id="generate-zip"
-            class="form__btn"
+            class="form__btn block"
           />
-          <button id="current-geolocation" class="form__btn btn-info">
+          <button id="current-geolocation" class="form__btn btn-info block">
             Search Geolocation
           </button>
           <p>
@@ -66,7 +75,7 @@
               id="feelings"
               cols="40"
               rows="1"
-              class="form__textarea"
+              class="form__textarea block"
               placeholder="How do you feel today?"
             ></textarea>
           </p>
@@ -74,15 +83,14 @@
       </header>
       <main class="main">
         <section class="section section_weather">
-          <h1 class="weather__city" id="city-name"></h1>
+          <h1 class="weather__city block" id="city-name"></h1>
           <div class="weather__entry" id="entryHolder">
-            <div class="weather__data" id="date">
+            <div class="weather__data block" id="date">
               <div class="weather__calendar" id="week-day"></div>
               <div class="weather__calendar" id="current-date"></div>
               <div class="weather__calendar" id="time"></div>
             </div>
-            <div class="weather__data" id="temp">
-              <i class="fa-solid fa-temperature-low"></i>
+            <div class="weather__data block" id="temp">
               <p>
                 <span class="weather__temp" id="current-temp"></span>
                 <span class="weather__units weather__units_active" id="celcius"
@@ -94,11 +102,11 @@
               <p>feels like <span class="weather__feel-temp"></span>°C</p>
               <div class="weather__image"></div>
             </div>
-            <div class="weather__data" id="content">
+            <div class="weather__data block" id="content">
               <ul class="weather__list description">
                 <li class="description__item">
                   <span
-                    class="description__data"
+                    class="description__data description__title"
                     id="current-weather-description"
                   ></span>
                 </li>
@@ -128,7 +136,7 @@
         </section>
       </main>
       <footer class="footer">
-        <p>
+        <p class="footer__links block">
           This App is created by
           <a
             href="https://nataliitaly.github.io/rsschool-cv/"
