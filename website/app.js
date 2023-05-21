@@ -82,7 +82,6 @@ for (let language in languages) {
   option.classList.add("form__option_language");
   option.textContent = languages[language];
   option.value = language;
-  option.setAttribute("data-language", language);
   langSelect.append(option);
 }
 
@@ -100,6 +99,29 @@ langSelect.addEventListener("change", function () {
   //getLanguage(this);
   console.log(lang);
 });
+
+/*----------------------- Countries ------------------------- */
+
+const countries = {
+  Afghanistan: "af",
+  "Aland Islands": "ax",
+  Albania: "al",
+  Algeria: "dz",
+  "American Samoa": "as",
+  Andorra: "ad",
+  Angola: "ao",
+  Anguilla: "ai",
+  Antarctica: "aq",
+};
+
+const countrySelect = document.getElementById("country-select");
+for (let country in countries) {
+  const option = document.createElement("option");
+  option.classList.add("form__option_country");
+  option.textContent = country;
+  option.value = country;
+  countrySelect.append(option);
+}
 
 /*-------------------- Celcius-Farenheit -------------------- */
 
@@ -149,9 +171,7 @@ let apiKey = "5c08670149a0b1a4dc7a372a3d5e5333";
 let units = "metric";
 
 function setCity(cityName) {
-  fetch(
-    `${url}weather?q=${cityName}&appid=${apiKey}&units=${units}&lang=${lang}`
-  )
+  fetch(`${url}weather?q=${cityName}&appid=${apiKey}&units=${units}`)
     .then((weather) => {
       return weather.json();
     })
@@ -159,7 +179,7 @@ function setCity(cityName) {
 }
 
 function setZipCode(zipCode) {
-  fetch(`${url}weather?zip=${zipCode}&appid=${apiKey}&units=${units}`)
+  fetch(`${url}weather?zip=${zipCode},dz&appid=${apiKey}&units=${units}`)
     .then((weather) => {
       return weather.json();
     })
@@ -167,6 +187,10 @@ function setZipCode(zipCode) {
 }
 
 setCity("Kyiv");
+
+function setRound(num) {
+  return Math.round(num);
+}
 
 function showWeather(data) {
   console.log(data);
@@ -177,11 +201,11 @@ function showWeather(data) {
     zipInput.value = "";
   } else {
     city.classList.remove("weather__city_error");
-    let temperature = Math.round(data.main.temp);
+    let temperature = setRound(data.main.temp);
     let weatherDescription = data.weather[0].description;
-    let feelTemperature = Math.round(data.main.feels_like);
-    let humidity = data.main.humidity;
-    let wind = data.wind.speed;
+    let feelTemperature = setRound(data.main.feels_like);
+    let humidity = setRound(data.main.humidity);
+    let wind = setRound(data.wind.speed);
     let sunrise = data.sys.sunrise;
     let sunset = data.sys.sunset;
     let currentImage = document.querySelector(".weather__image");
@@ -251,8 +275,8 @@ function displayForecast(data) {
     if (index > 0 && index < 7) {
       let dayForecast = document.createElement("div");
       dayForecast.classList.add("forecast__day", "block");
-      let minTempreture = Math.round(day.temp.min);
-      let maxTempreture = Math.round(day.temp.max);
+      let minTempreture = setRound(day.temp.min);
+      let maxTempreture = setRound(day.temp.max);
 
       dayForecast.innerHTML = `<div class="forecast__title">${formatDay(
         day.dt
@@ -273,11 +297,11 @@ function displayForecast(data) {
   /*------------------- Units change from Celcius to Farenheit----------- */
 
   function countCelsius(string) {
-    return Math.round((Number(string) - 32) / 1.8);
+    return setRound((Number(string) - 32) / 1.8);
   }
 
   function countFarenheit(string) {
-    return Math.round(Number(string) * 1.8 + 32);
+    return setRound(Number(string) * 1.8 + 32);
   }
 
   celcius.addEventListener("click", function () {

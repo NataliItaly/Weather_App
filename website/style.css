@@ -92,9 +92,11 @@ h1 {
   color: #656060;
 }
 
-.form__select_language {
+.form__select_language,
+.form__select_country {
   height: 38px;
   padding-left: 10px;
+  color: #656060;
   font-size: 14px;
 }
 
