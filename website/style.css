@@ -31,6 +31,8 @@ ul {
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   width: 100vw;
   height: 100vh;
   z-index: -1;
@@ -40,16 +42,6 @@ ul {
   width: fit-content;
   border-radius: 5px;
   background-color: rgba(211, 211, 227, 0.678);
-}
-
-h1 {
-  height: 48px;
-  padding: 0 20px;
-  margin: 0 auto 10px;
-  font-size: 32px;
-  text-transform: capitalize;
-  text-align: center;
-  transition: 0.4s;
 }
 
 .form {
@@ -92,6 +84,7 @@ h1 {
 }
 
 .form__textarea {
+  width: 80%;
   border-radius: 5px;
   padding: 10px;
   font-family: "Poppins", sans-serif;
@@ -120,6 +113,16 @@ h1 {
 
 .section_weather {
   padding-top: 0;
+}
+
+.weather__city {
+  height: 48px;
+  padding: 0 20px;
+  margin: 0 auto 10px;
+  font-size: 32px;
+  text-transform: capitalize;
+  text-align: center;
+  transition: 0.4s;
 }
 
 .weather__city_error {
@@ -259,6 +262,10 @@ h1 {
     padding: 15px;
   }
 
+  .form__textarea {
+    width: 100%;
+  }
+
   .weather__entry {
     gap: 20px;
   }
@@ -285,6 +292,10 @@ h1 {
 }
 
 @media (max-width: 530px) {
+  .weather__city {
+    font-size: 24px;
+    line-height: 42px;
+  }
   .forecast__data {
     max-width: 290px;
     justify-content: center;
@@ -293,5 +304,11 @@ h1 {
 
   .footer__links {
     font-size: 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  .weather__calendar {
+    font-size: 18px;
   }
 }

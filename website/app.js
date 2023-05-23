@@ -217,7 +217,7 @@ function showWeather(data) {
     currentWind.textContent = wind + " m/s";
     currentSunrise.textContent = formatTime(sunrise);
     currentSunset.textContent = formatTime(sunset);
-    currentImage.innerHTML = `<img src="http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="${data.weather[0].description}">`;
+    currentImage.innerHTML = `<img src="http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="${data.weather[0].description}" width="100" height="100">`;
     cityInput.value = "";
     getForecast(data.coord);
     setBackground(weatherDescription);
