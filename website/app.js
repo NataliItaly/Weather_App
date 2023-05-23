@@ -26,79 +26,6 @@ const weatherConditionsArr = [
 ];
 let hours = "";
 let month = "";
-const languages = {
-  af: "Afrikaans",
-  al: "Albanian",
-  ar: "Arabic",
-  az: "Azerbaijani",
-  bg: "Bulgarian",
-  ca: "Catalan",
-  cz: "Czech",
-  da: "Danish",
-  de: "German",
-  el: "Greek",
-  en: "English",
-  eu: "Basque",
-  fa: "Persian (Farsi)",
-  fi: "Finnish",
-  fr: "French",
-  gl: "Galician",
-  he: "Hebrew",
-  hi: "Hindi",
-  hr: "Croatian",
-  hu: "Hungarian",
-  id: "Indonesian",
-  it: "Italian",
-  ja: "Japanese",
-  kr: "Korean",
-  la: "Latvian",
-  lt: "Lithuanian",
-  mk: "Macedonian",
-  no: "Norwegian",
-  nl: "Dutch",
-  pl: "Polish",
-  pt: "Portuguese",
-  pt_br: "Português Brasil",
-  ro: "Romanian",
-  ru: "Russian",
-  sv: "Swedish",
-  sk: "Slovak",
-  sl: "Slovenian",
-  es: "Spanish",
-  sr: "Serbian",
-  th: "Thai",
-  tr: "Turkish",
-  ua: "Ukrainian",
-  vi: "Vietnamese",
-  zh_cn: "Chinese Simplified",
-  zh_tw: "Chinese Traditional",
-  zu: "Zulu",
-};
-
-/*------------------ Fill select language options ------------------ */
-const langSelect = document.getElementById("lang-select");
-for (let language in languages) {
-  const option = document.createElement("option");
-  option.classList.add("form__option_language");
-  option.textContent = languages[language];
-  option.value = language;
-  langSelect.append(option);
-}
-
-/*------------------- Event on language change--------------- */
-
-let lang = langSelect.value;
-console.log(langSelect.value);
-
-function getLanguage(elem) {
-  return elem.value;
-}
-
-langSelect.addEventListener("change", function () {
-  lang = langSelect.value;
-  //getLanguage(this);
-  console.log(lang);
-});
 
 /*----------------------- Countries ------------------------- */
 
@@ -112,6 +39,75 @@ const countries = {
   Angola: "ao",
   Anguilla: "ai",
   Antarctica: "aq",
+  " Antigua and Barbuda": "ag",
+  Argentina: "ar",
+  Armenia: "am",
+  Aruba: "aw",
+  Australia: "au",
+  Austria: "at",
+  Azerbaijan: "az",
+  Bahamas: "bs",
+  Bahrain: "bh",
+  Bangladesh: "bd",
+  Barbados: "bb",
+  Belarus: "by",
+  Belgium: "be",
+  Belize: "bz",
+  Benin: "bj",
+  Bermuda: "bm",
+  Bhutan: "bt",
+  Bolivia: "bo",
+  "Bosnia and Herzegovina": "ba",
+  Botswana: "bw",
+  "Bouvet Island": "bv",
+  Brazil: "br",
+  "British Indian Ocean": "io",
+  "Brunei Darussalam": "bn",
+  Bulgaria: "bg",
+  "Burkina Faso": "bf",
+  Burundi: "bi",
+  "Cabo Verde": "cv",
+  Cambodia: "kh",
+  Cameroon: "cm",
+  Canada: "ca",
+  "Cayman Islands": "ky",
+  "Central African Republic": "cf",
+  Chad: "td",
+  Chile: "cl",
+  China: "cn",
+  "Christmas Island": "cx",
+  "Cocos (Keeling) Islands": "cc",
+  Colombia: "co",
+  Comoros: "km",
+  "Democratic Republic of the Congo": "cd",
+  Congo: "cg",
+  "Cook Islands": "ck",
+  "Costa Rica": "cr",
+  "Côte d'Ivoire": "ci",
+  Croatia: "hr",
+  Cuba: "cu",
+  Curaçao: "cw",
+  Cyprus: "cy",
+  Czechia: "cz",
+  Denmark: "dk",
+  Djibouti: "dj",
+  Dominica: "dm",
+  "Dominican Republic": "do",
+  Ecuador: "ec",
+  Egypt: "eg",
+  "El Salvador": "sv",
+  "Equatorial Guinea": "gq",
+  Eritrea: "er",
+  Estonia: "ee",
+  Eswatini: "sz",
+  Ethiopia: "et",
+  "Falkland Islands": "fk",
+  "Faroe Islands": "fo",
+  Fiji: "fj",
+  Finland: "fi",
+  France: "fr",
+  "French Guiana": "gf",
+  USA: "us",
 };
 
 const countrySelect = document.getElementById("country-select");
@@ -119,7 +115,7 @@ for (let country in countries) {
   const option = document.createElement("option");
   option.classList.add("form__option_country");
   option.textContent = country;
-  option.value = country;
+  option.value = countries[country];
   countrySelect.append(option);
 }
 
@@ -151,7 +147,8 @@ cityForm.addEventListener("submit", function (event) {
 zipForm.addEventListener("submit", function (event) {
   event.preventDefault();
   let cityZip = zipInput.value;
-  setZipCode(cityZip);
+  let countryZip = countrySelect.value;
+  setZipCode(cityZip, countryZip);
   cityInput.value = "";
   forecastData.innerHTML = "";
   isCelcius = true;
@@ -178,8 +175,10 @@ function setCity(cityName) {
     .then(showWeather);
 }
 
-function setZipCode(zipCode) {
-  fetch(`${url}weather?zip=${zipCode},dz&appid=${apiKey}&units=${units}`)
+function setZipCode(zipCode, country) {
+  fetch(
+    `${url}weather?zip=${zipCode},${country}&appid=${apiKey}&units=${units}`
+  )
     .then((weather) => {
       return weather.json();
     })
@@ -248,6 +247,7 @@ function getCurrentLocation() {
   cityInput.value = "";
   city.textContent = "Searching for your location...";
   city.style.fontSize = "14px";
+  city.style.lineHeight = "48px";
   navigator.geolocation.getCurrentPosition(setPosition);
 }
 

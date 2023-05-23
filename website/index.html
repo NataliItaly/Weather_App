@@ -16,12 +16,6 @@
     />
     <link rel="stylesheet" href="style.css" />
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
-
-    <!-- <script
-      src="https://kit.fontawesome.com/2098af3067.js"
-      crossorigin="anonymous"
-    ></script> -->
-
     <title>Weather App</title>
   </head>
   <body>
@@ -29,36 +23,25 @@
     <div class="container">
       <header class="header">
         <form action="@" class="form" id="city-form">
-          <p class="form__inputs">
-            <input
-              type="text"
-              placeholder="Enter your city name"
-              id="city-input"
-              class="form__input block"
-            />
-            <input
-              type="submit"
-              value="Search By City Name"
-              id="generate-city"
-              class="form__btn block"
-            />
-            <select
-              name="lang-select"
-              id="lang-select"
-              class="form__select_language block"
-            >
-              <option value="@" class="form__option_language">
-                Choose Language
-              </option>
-            </select>
-          </p>
-        </form>
-        <form action="@" class="form" id="zip-form">
           <input
             type="text"
-            placeholder="Enter your zip code"
-            id="zip-input"
+            placeholder="City name"
+            id="city-input"
             class="form__input block"
+          />
+          <input
+            type="submit"
+            value="Search By City"
+            id="generate-city"
+            class="form__btn block"
+          />
+        </form>
+        <form action="@" class="form form_zip" id="zip-form">
+          <input
+            type="text"
+            placeholder="Zip code"
+            id="zip-input"
+            class="form__input form__input_zip block"
           />
           <select
             name="country-select"
@@ -74,20 +57,21 @@
             value="Search By Zip Code"
             id="generate-zip"
             class="form__btn block"
+            title="You have to choose the country"
           />
+        </form>
+        <form action="@" class="form form_textarea">
           <button id="current-geolocation" class="form__btn btn-info block">
             Search Geolocation
           </button>
-          <p>
-            <textarea
-              name=""
-              id="feelings"
-              cols="40"
-              rows="1"
-              class="form__textarea block"
-              placeholder="How do you feel today?"
-            ></textarea>
-          </p>
+          <textarea
+            name=""
+            id="feelings"
+            cols="40"
+            rows="1"
+            class="form__textarea block"
+            placeholder="How do you feel today?"
+          ></textarea>
         </form>
       </header>
       <main class="main">
