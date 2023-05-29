@@ -98,11 +98,10 @@ ul {
   color: #656060;
 }
 
-.form__select_language,
 .form__select_country {
   height: 38px;
+  color: #0c0b0b;
   padding-left: 10px;
-  color: #656060;
   font-size: 14px;
 }
 
