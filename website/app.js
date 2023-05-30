@@ -278,10 +278,11 @@ if (isCelcius === true) {
 
 /*-------------------Generate weather forecast-------------------- */
 
+// weather for city input:
 cityForm.addEventListener("submit", function (event) {
   event.preventDefault();
   let cityName = cityInput.value;
-  setCity(cityName);
+  setCity(cityName); // take weather data from Openweathermap
   zipInput.value = "";
   forecastData.innerHTML = "";
   isCelcius = true;
@@ -289,12 +290,13 @@ cityForm.addEventListener("submit", function (event) {
   farenheit.classList.remove("weather__units_active");
 });
 
+// weather for zip code:
 zipForm.addEventListener("submit", function (event) {
   event.preventDefault();
   let cityZip = zipInput.value;
   console.log(countrySelect.value);
   let countryZip = `,${countrySelect.value}` || "";
-  setZipCode(cityZip, countryZip);
+  setZipCode(cityZip, countryZip); // take weather data from Openweathermap
   cityInput.value = "";
   forecastData.innerHTML = "";
   isCelcius = true;
@@ -313,6 +315,7 @@ const url = "https://api.openweathermap.org/data/2.5/";
 let apiKey = "5c08670149a0b1a4dc7a372a3d5e5333";
 let units = "metric";
 
+// function get weather data from Openweathermap on city input
 function setCity(cityName) {
   fetch(`${url}weather?q=${cityName}&appid=${apiKey}&units=${units}`)
     .then((weather) => {
@@ -321,6 +324,7 @@ function setCity(cityName) {
     .then(showWeather);
 }
 
+// function get weather data from Openweathermap on zip code input
 function setZipCode(zipCode, country) {
   fetch(`${url}weather?zip=${zipCode}${country}&appid=${apiKey}&units=${units}`)
     .then((weather) => {
@@ -368,6 +372,25 @@ function showWeather(data) {
     setBackground(weatherDescription);
   }
 }
+
+/*--------------------------- POST request --------------------------- */
+const postData = async (path, data) => {
+  const response = await fetch(path, {
+    method: "POST",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  try {
+    const newData = await response.json();
+    return newData;
+  } catch (error) {
+    console.log("error", error);
+  }
+};
 
 /*--------------------- set user's geolocation---------------------*/
 
