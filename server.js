@@ -29,13 +29,13 @@ function listening() {
 
 // creating GET request
 app.get("/", function (req, res) {
-  res.send("hello world");
+  res.send(projectData);
   console.log(req);
 });
 
 // POST request
 app.post("/", function (req, res) {
-  projectData.temperature = req.body.temperature;
+  projectData.temperature = req.body.main.temp;
   projectData.date = req.body.date;
   projectData.userResponse = req.body.userResponse;
   res.send("Data added");

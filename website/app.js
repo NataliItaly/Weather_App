@@ -374,6 +374,7 @@ function showWeather(data) {
 }
 
 /*--------------------------- POST request --------------------------- */
+
 const postData = async (path, data) => {
   const response = await fetch(path, {
     method: "POST",
@@ -575,7 +576,7 @@ function setZero(data) {
 }
 
 function formatTime(timeSpamp) {
-  let date = new Date(timeSpamp);
+  let date = new Date(timeSpamp * 1000);
   let hours = date.getHours();
   let minutes = date.getMinutes();
   return `${setZero(hours)}:${setZero(minutes)}`;
