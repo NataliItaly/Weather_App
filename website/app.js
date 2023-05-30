@@ -337,6 +337,7 @@ function setRound(num) {
 
 function showWeather(data) {
   console.log(data);
+  //projectData.result = data;
   if (data.message === "city not found") {
     city.classList.add("weather__city_error");
     city.textContent = "Please enter correct location";
@@ -577,7 +578,7 @@ function setBackground(description) {
     }
   });
 
-  videoContainer.innerHTML = `<video autoplay muted loop id="myVideo">
+  videoContainer.innerHTML = `<video autoplay muted loop id="myVideo" class="video">
         <source src="video/${dayPart}/${keyDescription}.mp4" type="video/mp4">
       </video>`;
 }

@@ -1,3 +1,5 @@
+projectData = {};
+
 // Express to run server and routes
 const express = require("express");
 
@@ -28,4 +30,5 @@ function listening() {
 // creating GET request
 app.get("/", function (req, res) {
   res.send("hello world");
+  console.log(req);
 });
