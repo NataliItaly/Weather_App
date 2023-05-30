@@ -1,4 +1,4 @@
-projectData = {};
+const projectData = {};
 
 // Express to run server and routes
 const express = require("express");
@@ -35,5 +35,8 @@ app.get("/", function (req, res) {
 
 // POST request
 app.post("/", function (req, res) {
-  res.send("POST received");
+  projectData.temperature = req.body.temperature;
+  projectData.date = req.body.date;
+  projectData.userResponse = req.body.userResponse;
+  res.send("Data added");
 });
