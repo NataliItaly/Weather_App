@@ -32,3 +32,8 @@ app.get("/", function (req, res) {
   res.send("hello world");
   console.log(req);
 });
+
+// POST request
+app.post("/", function (req, res) {
+  res.send("POST received");
+});
