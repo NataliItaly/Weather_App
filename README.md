@@ -5,8 +5,9 @@
 # Weather App Project
 
 - adaptive web design
-- search weather for city name, zip code and geolocation
+- search weather for city name, zip code of choosen country, geolocation
 - dinamicly update UI: show temperature, feels like temperature, humidity, wind speed, sunrise, sunset.
+- converter Celcius to Farenheit unit
 - dinamicly update current time
 - next 6 days forecast
 - dinamicly update video background depends of day time and weather conditions
